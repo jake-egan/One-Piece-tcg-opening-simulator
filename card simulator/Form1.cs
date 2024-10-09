@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
 using System.Windows.Forms;
 
 namespace card_simulator
@@ -17,10 +18,10 @@ namespace card_simulator
         public Form1()
         {
             InitializeComponent();
-
+            
             // Ensure event is bound
             this.card.Click += new EventHandler(this.pictureBox1_Click);
-
+            
             common_list = new List<Image>
             {
                 Properties.Common.common__2_,
@@ -201,24 +202,38 @@ namespace card_simulator
 
 
             };
-            pack_creation();
-            currentImageIndex = 0;
-            card.Image = pack[currentImageIndex]; // Set initial image
+            pack = new List<Image> { };
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            // For debugging
+
             currentImageIndex++;
+            //play sound for pulling a rare
+            if (currentImageIndex == pack.Count - 1) {
+                using (var soundPlayer = new SoundPlayer(@"c:\Windows\Media\chimes.wav"))
+                {
+                    soundPlayer.Play(); // can also use soundPlayer.PlaySync()
+                }
+            }
+
             if (currentImageIndex >= pack.Count) // Change to >=
             {
+                
                 currentImageIndex = 0; // Wrap around to the first image
+            }
+
+            if (pack.Count == 0)
+            {
+                pack_creation();
             }
             card.Image = pack[currentImageIndex]; // Set the new image
         }
 
         private void pack_creation()
         {
+            currentImageIndex = 0;
+            
             pack = new List<Image> { };
             Random rnd = new Random();
 
@@ -247,12 +262,10 @@ namespace card_simulator
             pack.Add(Rare_list[rnd.Next(rare_amount)]);
 
 
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            card.Image = Properties.cardback.backofcard;
             pack_creation();
 
         }
