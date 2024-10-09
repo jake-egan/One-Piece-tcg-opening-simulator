@@ -29,23 +29,35 @@
         private void InitializeComponent()
         {
             card = new PictureBox();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)card).BeginInit();
             SuspendLayout();
             // 
             // card
             // 
-            card.Location = new Point(1, 3);
+            card.Location = new Point(12, 34);
             card.Name = "card";
             card.Size = new Size(364, 484);
             card.SizeMode = PictureBoxSizeMode.StretchImage;
             card.TabIndex = 0;
             card.TabStop = false;
             // 
+            // button1
+            // 
+            button1.Location = new Point(132, 547);
+            button1.Name = "button1";
+            button1.Size = new Size(110, 23);
+            button1.TabIndex = 1;
+            button1.Text = "OPEN NEW PACK";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(377, 499);
+            ClientSize = new Size(388, 582);
+            Controls.Add(button1);
             Controls.Add(card);
             Name = "Form1";
             Text = "Form1";
@@ -56,5 +68,6 @@
         #endregion
 
         private PictureBox card;
+        private Button button1;
     }
 }

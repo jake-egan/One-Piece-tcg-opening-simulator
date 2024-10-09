@@ -17,7 +17,7 @@ namespace card_simulator
         public Form1()
         {
             InitializeComponent();
-            
+
             // Ensure event is bound
             this.card.Click += new EventHandler(this.pictureBox1_Click);
 
@@ -199,20 +199,16 @@ namespace card_simulator
             Properties.Rare.rare__64_,
             Properties.Rare.rare__65_,
 
-            
+
             };
-            pack = new List<Image> { };
             pack_creation();
-
-
-
             currentImageIndex = 0;
             card.Image = pack[currentImageIndex]; // Set initial image
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-             // For debugging
+            // For debugging
             currentImageIndex++;
             if (currentImageIndex >= pack.Count) // Change to >=
             {
@@ -221,8 +217,9 @@ namespace card_simulator
             card.Image = pack[currentImageIndex]; // Set the new image
         }
 
-        private void pack_creation() 
+        private void pack_creation()
         {
+            pack = new List<Image> { };
             Random rnd = new Random();
 
             int uncommon_amount;
@@ -235,7 +232,7 @@ namespace card_simulator
             rare_amount = Rare_list.Count;
 
             //common card pulls
-            for (int i = 0; i < 3; i++) 
+            for (int i = 0; i < 3; i++)
             {
                 pack.Add(common_list[rnd.Next(common_amount)]);
             };
@@ -252,5 +249,13 @@ namespace card_simulator
 
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            card.Image = Properties.cardback.backofcard;
+            pack_creation();
+
+        }
+
     }
 }
